@@ -19,32 +19,32 @@ function playRound(playerSelection, computerSelection) {
     if (player1 === "rock") {
         if (player2 === "scissors") {
             player1Score++
-            return "You win! Rock beats Scissors";
+            alert("You win! Rock beats Scissors");
         } else if (player2 === "paper") {
             player2Score++
-            return "You Lose! Paper beats Rock";
+            alert("You Lose! Paper beats Rock");
         } else if (player2 === "rock") {
-            return "Draw!";
+            alert("Draw!");
         }
     } else if (player1 === "scissors") {
         if (player2 === "scissors") {
-            return "Draw!";
+            alert("Draw!");
         } else if (player2 === "paper") {
             player1Score++
-            return "You win! Scissors beats Paper";
+            alert("You win! Scissors beats Paper");
         } else if (player2 === "rock") {
             player2Score++
-            return "You Lose! Rock beats scissors";
+            alert("You Lose! Rock beats scissors");
         }
     } else if (player1 === "paper") {
         if (player2 === "scissors") {
             player2Score++
-            return "You Lose! Scissors beats Paper";
+            alert("You Lose! Scissors beats Paper");
         } else if (player2 === "paper") {
-            return "Draw!";
+            alert("Draw!");
         } else if (player2 === "rock") {
             player1Score++
-            return "You Win! Paper beats Rock";
+            alert("You Win! Paper beats Rock");
         }
     }
 }
