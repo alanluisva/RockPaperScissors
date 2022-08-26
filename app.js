@@ -1,12 +1,11 @@
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3) + 1;
     if (computerChoice === 1) {
-        return "Rock";
+        return "rock";
     } else if (computerChoice === 2) {
-        return "Paper";
-    } else {
-        return "Scissors";
+        return "paper";
     }
+    return "scissors";
 }
 
 let player1Score = 0;
@@ -14,20 +13,19 @@ let player2Score = 0;
 
 function playRound(playerSelection, computerSelection) {
     let player = playerSelection.toLowerCase();
-    let computer = computerSelection.toLowerCase();
 
-    if (player === computer) {
+    if (player === computerSelection) {
         return "Draw!";
     } else if (
-        (player === "rock" && computer === "scissors") ||
-        (player === "scissors" && computer === "paper") ||
-        (player === "paper" && computer === "rock")
+        (player === "rock" && computerSelection === "scissors") ||
+        (player === "scissors" && computerSelection === "paper") ||
+        (player === "paper" && computerSelection === "rock")
     ) {
         player1Score++;
-        return `You Win! ${player} beats ${computer}`;
+        return `You Win! ${player} beats ${computerSelection}`;
     }
     player2Score++;
-    return `You Lose! ${computer} beats ${player}`;
+    return `You Lose! ${computerSelection} beats ${player}`;
 }
 
 function game() {
