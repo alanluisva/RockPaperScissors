@@ -1,53 +1,49 @@
-function getComputerChoice() {
-    let computerChoice = Math.floor(Math.random() * 3) + 1;
-    if (computerChoice === 1) {
-        return "rock";
-    } else if (computerChoice === 2) {
-        return "paper";
-    }
-    return "scissors";
-}
-
 let player1Score = 0;
 let player2Score = 0;
+const buttons = document.querySelectorAll("button");
+
+function getComputerChoice() {
+    let choices = ["Rock", "Paper", "Scissors"];
+    return choices[Math.floor(Math.random() * choices.length)];
+}
+
+function disableButtons() {
+    buttons.forEach(elem => {
+        elem.disabled = true;
+    });
+}
 
 function playRound(playerSelection, computerSelection) {
-    let player = playerSelection.toLowerCase();
+    let result = "";
 
-    if (player === computerSelection) {
-        return "Draw!";
+    if (playerSelection === computerSelection) {
+        result = `<br> Draw! <br> Player score: ${player1Score} vs Computer score: ${player2Score}`;
     } else if (
-        (player === "rock" && computerSelection === "scissors") ||
-        (player === "scissors" && computerSelection === "paper") ||
-        (player === "paper" && computerSelection === "rock")
+        (playerSelection === "Rock" && computerSelection === "Scissors") ||
+        (playerSelection === "Scissors" && computerSelection === "Paper") ||
+        (playerSelection === "Paper" && computerSelection === "Rock")
     ) {
         player1Score++;
-        return `You Win! ${player} beats ${computerSelection}`;
-    }
-    player2Score++;
-    return `You Lose! ${computerSelection} beats ${player}`;
-}
-
-function game() {
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt(
-            "Choose one of three shapes (rock, paper or scissors)"
-        );
-        const computerSelection = getComputerChoice();
-
-        let result = playRound(playerSelection, computerSelection);
-        alert(result);
-        console.log(result);
-        console.log(
-            `Player score: ${player1Score} vs Computer score: ${player2Score}`
-        );
-        console.log("-------------------------------------");
-    }
-    if (player1Score > player2Score) {
-        alert("YOU WON THE GAME!");
-    } else if (player1Score < player2Score) {
-        alert("THE COMPUTER WON THE GAME!");
+        result = `<br> You Win! ${playerSelection} beats ${computerSelection} <br> Player score: ${player1Score} vs Computer score: ${player2Score}`;
     } else {
-        alert("IT'S A TIE!");
+        player2Score++;
+        result = `<br> You Lose! ${computerSelection} beats ${playerSelection} <br> Player score: ${player1Score} vs Computer score: ${player2Score}`;
+    }
+
+    document.querySelector("div").innerHTML = result;
+
+    if (player1Score === 5) {
+        document.querySelector("div").innerHTML += `<br><br>YOU WON THE GAME!`;
+        disableButtons();
+    } else if (player2Score === 5) {
+        document.querySelector("div").innerHTML += `<br><br>THE COMPUTER WON THE GAME!`;
+        disableButtons();
     }
 }
+
+buttons.forEach(button => {
+    // for each one we add a 'click' listener
+    button.addEventListener("click", () => {
+        playRound(button.textContent, getComputerChoice());
+    });
+});
